@@ -9,6 +9,8 @@ using namespace std;
 
 Sender::Sender(){
     messageList = NULL;
+    idCounter = 0;
+    readFromFile();
 }
 
 Sender::~Sender(){
@@ -92,7 +94,6 @@ void Sender::changeUser(string name){
 }
 
 void Sender::postMessage(string name, string message){
-    cout<<"1,"<<endl;
     Message *current = new Message;
     Message *temp = new Message;
     temp = messageList;
@@ -101,6 +102,8 @@ void Sender::postMessage(string name, string message){
     current->receiver = name;
     current->previous = NULL;
     current->next = NULL;
+    current->id = idCounter;
+    idCounter++;
     if(temp == NULL){//for the initial posting
         messageList = current;
     }
@@ -123,20 +126,123 @@ bool Sender::found(string input){
     return exists;
 }
 
-void Sender::deleteOwn(){
-    //Delete most current msg to all
+
+void Sender::viewMessages(){   //Loop through all messages and print out Private then Public messages
+    vector<int> msgID;
+    int msgCounter = 1;  //Ties into vector to "remember" spot for different rando msg ID's
+    Message *trav = new Message;
+    trav = messageList;
+
+    //Private
+    cout << endl << "     PRIVATE" << endl;
+    while (trav != NULL){
+        if (trav->receiver == currentUser){
+            cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+        }
+        else if (trav->sender == currentUser and trav->receiver != "all"){
+            cout << msgCounter << ": YOU to " << trav->receiver << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+        }
+        trav = trav->next;
+    }
+
+    //Public
+    trav = messageList;
+    cout << endl << "     PUBLIC" << endl;
+    while (trav != NULL){
+        if (trav->receiver == "all"){
+            cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+        }
+        trav = trav->next;
+    }
+    cout << endl;
+
 
 }
 
-void Sender::deleteReceived(){
-    //Del most current recieved
+
+void Sender::deleteMessage(){
+    //Copy code from view messages to have same vector of msg id's to match with what the user is deleting
+    vector<int> msgID;
+    int msgCounter = 0;  //Ties into vector to "remember" spot for different rando msg ID's
+    Message *trav = new Message;
+    trav = messageList;
+
+    //Private
+    while (trav != NULL){
+        if (trav->receiver == currentUser){
+            msgID.push_back(trav->id);
+            msgCounter++;
+        }
+        else if (trav->sender == currentUser){
+            msgID.push_back(trav->id);
+            msgCounter++;
+        }
+        trav = trav->next;
+    }
+
+    //Public
+    trav = messageList;
+    while (trav != NULL){
+        if (trav->receiver == "all"){
+            msgID.push_back(trav->id);
+            msgCounter++;
+        }
+        trav = trav->next;
+    }
+
+    //END Copy with couts deleted
+    cout << "Which message would you like to delete?  Or select 0 to exit" << endl;
+    cout << "1";
+    for (int i = 1; i < msgID.size(); ++i){
+        cout <<", " << i+1;
+    }
+    cout << endl;
+    string del;
+    getline(cin >> ws, del);
+    while (stoi(del) >> msgID.size()+1){
+        cout << "Not a valid message, please select a valid message number or 0." << endl;
+        getline(cin >> ws, del);
+    }
+    if (stoi(del) == 0){
+        return;
+    }
+    int delID = msgID[stoi(del)-1];
+
+    //Find the message to be deleted in the linked list
+    trav = messageList;
+    while(trav->id != delID){
+        trav = trav->next;
+    }
+
+    //Linked list delete
+    trav->previous->next = trav->next;
+    trav->next->previous = trav->previous;
+    delete trav;
+
+
 
 }
 
-void Sender::viewPrivate(){
+void Sender::deleteAll(){
 
 }
 
-void Sender::viewPublic(){
+void Sender::readFromFile(){
 
 }
+
+void Sender::writeToFile(){
+
+}
+
+
+
+
+
+

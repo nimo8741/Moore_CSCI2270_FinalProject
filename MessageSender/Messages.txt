@@ -10,3 +10,6 @@ Scott
 Messages
 
 msg id:sender:reciever:note
+
+%
+msgCounter = #

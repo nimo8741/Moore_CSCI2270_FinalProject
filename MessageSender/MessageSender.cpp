@@ -34,7 +34,7 @@ int main(){
 		}
 		else{
             if(cmd == "1"){
-
+                action->viewMessages();
             }
             else if(cmd == "2"){
                 action->printUsers();
@@ -52,7 +52,7 @@ int main(){
                 string recipient;
                 while(found != true && quit != true){
                     getline(cin >> ws, recipient);
-                    bool found = action->found(recipient);
+                    found = action->found(recipient);
                     if(recipient == "all"){
                         quit = true;
                     }
@@ -70,7 +70,7 @@ int main(){
                 action->postMessage(recipient, in_message);
             }
             else if(cmd == "4"){
-                cout<<"you have picked 4"<<endl;
+                action->deleteMessage();
             }
             else if(cmd == "5"){
                 cout<<"Please Login"<<endl;
@@ -80,7 +80,8 @@ int main(){
                 action->changeUser(userChange);
             }
             else if(cmd == "6"){
-                cout<<"Thank you for using MessageSender!"<<endl;
+                cout<<"Thank you for using MessageSender!"<<endl<<endl;
+                action->writeToFile();
             }
 		}
     }

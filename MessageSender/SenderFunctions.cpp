@@ -7,17 +7,17 @@
 
 using namespace std;
 
-sender::sender(){
-
+Sender::Sender(){
+    messageList = NULL;
 }
 
-sender::~sender(){
+Sender::~Sender(){
     for(int i = 0; i < users.size(); i++){
         users[i] = "";
     }
 }
 
-void sender::createUser(string name){
+void Sender::createUser(string name){
     bool found  = false;
     for(int i = 0; i < users.size(); i++){
         if(name == users[i]){
@@ -37,7 +37,7 @@ void sender::createUser(string name){
     }
 }
 
-void sender::organizeUsers(){
+void Sender::organizeUsers(){
     string swapName;
     int n = users.size();
     for(int i = 0; i < n; i++){
@@ -51,7 +51,7 @@ void sender::organizeUsers(){
     }
 }
 
-void sender::printUsers(){
+void Sender::printUsers(){
     if(users.size() == 0){    //this if condition should never happen but I included it anyways
         cout<<"No active users"<<endl;
     }
@@ -65,7 +65,7 @@ void sender::printUsers(){
     }
 }
 
-void sender::changeUser(string name){
+void Sender::changeUser(string name){
     bool found  = false;
     for(int i = 0; i < users.size(); i++){
         if(name == users[i]){
@@ -91,7 +91,8 @@ void sender::changeUser(string name){
     }
 }
 
-void sender::postMessage(string name, string message){
+void Sender::postMessage(string name, string message){
+    cout<<"1,"<<endl;
     Message *current = new Message;
     Message *temp = new Message;
     temp = messageList;
@@ -112,7 +113,7 @@ void sender::postMessage(string name, string message){
     }
 }
 
-bool sender::found(string input){
+bool Sender::found(string input){
     bool exists = false;
     for(int i = 0; i < users.size(); i++){
         if(input == users[i]){
@@ -122,18 +123,20 @@ bool sender::found(string input){
     return exists;
 }
 
-void sender::deleteOwn(){
+void Sender::deleteOwn(){
+    //Delete most current msg to all
 
 }
 
-void sender::deleteReceived(){
+void Sender::deleteReceived(){
+    //Del most current recieved
 
 }
 
-void sender::viewPrivate(){
+void Sender::viewPrivate(){
 
 }
 
-void sender::viewPublic(){
+void Sender::viewPublic(){
 
 }

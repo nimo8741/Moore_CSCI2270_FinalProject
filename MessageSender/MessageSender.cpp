@@ -8,7 +8,7 @@
 using namespace std;
 
 int main(){
-    sender *action = new sender;
+    Sender *action = new Sender;
     cout<<"Welcome to MessageSender!"<<endl;
     cout<<endl;
     string username;

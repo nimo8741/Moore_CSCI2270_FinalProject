@@ -11,10 +11,10 @@ struct Message{
     Message *previous;
 };
 
-class sender{
+class Sender{
     public:
-        sender();
-        ~sender();
+        Sender();
+        ~Sender();
         void createUser(std::string name);
         void changeUser(std::string name);
         void postMessage(std::string name, std::string message);

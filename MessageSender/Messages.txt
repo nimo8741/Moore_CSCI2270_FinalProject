@@ -1,0 +1,12 @@
+MessageSender text file
+%
+Users
+
+aoeu
+Nick
+Scott
+
+%
+Messages
+
+msg id:sender:reciever:note

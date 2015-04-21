@@ -6,7 +6,7 @@ How to Run:
 
 Dependencies:
 
-System Requirements:
+System Requirements:  Computer that can run
 
 Group Members:
 This project is created by Nicholas Moore and Scott Schubert

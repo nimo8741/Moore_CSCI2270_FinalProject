@@ -1,28 +1,35 @@
 #ifndef SENDERFUNCTIONS_H
 #define SENDERFUNCTIONS_H
+#include <vector>
+#include <iostream>
 
 struct Message{
     std::string note;
     std::string sender;
     std::string receiver;
     Message *next;
+    Message *previous;
 };
 
 class sender{
     public:
-        messageSend();
-        ~messageSend();
+        sender();
+        ~sender();
         void createUser(std::string name);
         void changeUser(std::string name);
-        void postPrivate(std::name, std::string message);
-        void postPublic(std::string message);
+        void postMessage(std::string name, std::string message);
         void deleteOwn();
         void deleteReceived();
         void viewPrivate();
         void viewPublic();
-    protected::
-    private::
+        void printUsers();
+        void organizeUsers();
+        bool found(std::string input);
+    protected:
+    private:
         Message *messageList;
+        std::vector<std::string> users;
+        std::string currentUser;
 };
 
 #endif //SENDERFUNCTIONS_H

@@ -6,7 +6,7 @@ How to Run:
 
 Dependencies:
 
-System Requirements:  Computer that can run
+System Requirements:  Computer that can run and compile a C++ program.  No special dependencies.
 
 Group Members:
 This project is created by Nicholas Moore and Scott Schubert

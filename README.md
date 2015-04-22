@@ -14,3 +14,4 @@ This project is created by Nicholas Moore and Scott Schubert
 Contributors:
 
 Open issues/bugs:
+Enhancement request:  A password system that requires a user to enter a password when logging in.  

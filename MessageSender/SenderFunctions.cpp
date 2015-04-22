@@ -135,30 +135,40 @@ void Sender::viewMessages(){   //Loop through all messages and print out Private
 
     //Private
     cout << endl << "     PRIVATE" << endl;
-    while (trav != NULL){
-        if (trav->receiver == currentUser){
-            cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
-            msgID.push_back(trav->id);
-            msgCounter++;
+    if(trav == NULL){
+        cout<<"Your inbox is empty"<<endl;
+    }
+    else{
+        while (trav != NULL){
+            if (trav->receiver == currentUser){
+                cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
+                msgID.push_back(trav->id);
+                msgCounter++;
+            }
+            else if (trav->sender == currentUser and trav->receiver != "all"){
+                cout << msgCounter << ": YOU to " << trav->receiver << " - " << trav->note << endl;
+                msgID.push_back(trav->id);
+                msgCounter++;
+            }
+            trav = trav->next;
         }
-        else if (trav->sender == currentUser and trav->receiver != "all"){
-            cout << msgCounter << ": YOU to " << trav->receiver << " - " << trav->note << endl;
-            msgID.push_back(trav->id);
-            msgCounter++;
-        }
-        trav = trav->next;
     }
 
     //Public
     trav = messageList;
     cout << endl << "     PUBLIC" << endl;
-    while (trav != NULL){
-        if (trav->receiver == "all"){
-            cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
-            msgID.push_back(trav->id);
-            msgCounter++;
+    if(trav == NULL){
+        cout<<"Your inbox is empty"<<endl;
+    }
+    else{
+        while (trav != NULL){
+            if (trav->receiver == "all"){
+                cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
+                msgID.push_back(trav->id);
+                msgCounter++;
+            }
+            trav = trav->next;
         }
-        trav = trav->next;
     }
     cout << endl;
 

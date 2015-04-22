@@ -13,3 +13,4 @@ msg id:sender:reciever:note
 
 %
 msgCounter = #
+UPSTREAM work?

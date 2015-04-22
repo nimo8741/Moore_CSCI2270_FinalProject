@@ -6,4 +6,5 @@ Scott
 %0*Scott*Nick*Whatsup
 1*Nick*Scott*Nothing much man
 5*Nick*all*This project is great
+6*Marcus*all*My name is marcus
 %6%

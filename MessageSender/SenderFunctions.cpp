@@ -139,40 +139,41 @@ void Sender::viewMessages(){   //Loop through all messages and print out Private
 
     //Private
     cout << endl << "     PRIVATE" << endl;
-    if(trav == NULL){
-        cout<<"Your inbox is empty"<<endl;
-    }
-    else{
-        while (trav != NULL){
-            if (trav->receiver == currentUser){
-                cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
-                msgID.push_back(trav->id);
-                msgCounter++;
-            }
-            else if (trav->sender == currentUser and trav->receiver != "all"){
-                cout << msgCounter << ": YOU to " << trav->receiver << " - " << trav->note << endl;
-                msgID.push_back(trav->id);
-                msgCounter++;
-            }
-            trav = trav->next;
+    bool isEmpty = true;
+    while(trav != NULL){
+        if (trav->receiver == currentUser){
+            cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+            isEmpty = false;
         }
+        else if (trav->sender == currentUser && trav->receiver != "all"){
+            cout << msgCounter << ": YOU to " << trav->receiver << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+            isEmpty = false;
+        }
+        trav = trav->next;
+    }
+    if(isEmpty == true){
+        cout<<"Your inbox is empty"<<endl;
     }
 
     //Public
     trav = messageList;
     cout << endl << "     PUBLIC" << endl;
-    if(trav == NULL){
-        cout<<"Your inbox is empty"<<endl;
-    }
-    else{
-        while (trav != NULL){
-            if (trav->receiver == "all"){
-                cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
-                msgID.push_back(trav->id);
-                msgCounter++;
-            }
-            trav = trav->next;
+    bool isitEmpty = true;
+    while (trav != NULL){
+        if (trav->receiver == "all"){
+            cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+            isitEmpty = false;
         }
+        trav = trav->next;
+    }
+    if(isitEmpty == true){
+        cout<<"Your inbox is empty"<<endl;
     }
     cout << endl;
 
@@ -283,6 +284,7 @@ void Sender::readFromFile(){
         else{
             tail->next = newMessage;
             newMessage->previous = tail;
+            newMessage->next = NULL;
             tail = tail->next;
         }
     }

@@ -244,7 +244,8 @@ void Sender::deleteMessage(){
 }
 
 void Sender::deleteAll(){
-
+    messageList = NULL;
+    users.clear();
 }
 
 void Sender::readFromFile(){

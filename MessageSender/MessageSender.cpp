@@ -18,7 +18,6 @@ int main(){
     getline(cin >> ws, username);
     cout<<endl;
     action->createUser(username);
-    cout << "Current user should be; " << username << " or " << action->curUser()<<endl;
     string cmd;
     while(cmd != "6"){
         cout << "======Main Menu=====" << endl;
@@ -28,9 +27,12 @@ int main(){
 		cout << "4. Delete Messages" << endl;
 		cout << "5. Switch Users"<<endl;
 		cout << "6. Exit MessageSender"<<endl;
+        if (action->curUser() == "admin"){
+            cout << "7. Delete all" << endl;
+        }
 
 		cin>>cmd;
-		if(cmd != "1" && cmd != "2" && cmd != "3" && cmd != "4" && cmd != "5" && cmd != "6"){
+		if(cmd != "1" && cmd != "2" && cmd != "3" && cmd != "4" && cmd != "5" && cmd != "6" and cmd != "7"){
             cout<<"Please select an appropriate command."<<endl;
             cout<<"An appropriate command is a number 1 through 5."<<endl;
 		}
@@ -89,6 +91,10 @@ int main(){
             else if(cmd == "6"){
                 cout<<"Thank you for using MessageSender!"<<endl<<endl;
                 action->writeToFile();
+            }
+            else if(cmd == "7"){
+                cout << "Deleting all users and messages" << endl;
+                action->deleteAll();
             }
 		}
     }

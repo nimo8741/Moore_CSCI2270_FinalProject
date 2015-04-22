@@ -11,6 +11,7 @@ int main(){
     Sender *action = new Sender;
     cout<<"Welcome to MessageSender!"<<endl;
     cout<<endl;
+    action->readFromFile();
     string username;
     cout<<"Please Login"<<endl;
     cout<<"Username: ";

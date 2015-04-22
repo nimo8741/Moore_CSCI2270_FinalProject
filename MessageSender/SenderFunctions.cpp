@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <vector>
+#include <sstream>
 #include "SenderFunctions.h"
 
 using namespace std;
@@ -247,7 +248,46 @@ void Sender::deleteAll(){
 }
 
 void Sender::readFromFile(){
-
+    ifstream infile;
+    infile.open("Messages.txt");
+    string section, user, msg, counter;
+    //Users
+    getline(infile, section,'%');
+    istringstream userStream(section);
+    users.clear();
+    while(getline(userStream, user)){
+        users.push_back(user);
+    }
+    //Messages:   msgID*sender*reciever*note
+    getline(infile, section, '%');
+    istringstream msgStream(section);
+    Message *tail = new Message;
+    tail = messageList;
+    while(getline(msgStream, msg)){
+        istringstream lineStream(msg);
+        string msgID, sender, receiver, note;
+        Message *newMessage = new Message;
+        getline(lineStream, msgID, '*');
+        getline(lineStream, sender, '*');
+        getline(lineStream, receiver, '*');
+        getline(lineStream, note, '*');
+        newMessage->id = stoi(msgID);
+        newMessage->sender = sender;
+        newMessage->receiver = receiver;
+        newMessage->note = note;
+        if (messageList == NULL){
+            messageList = newMessage;
+            tail = messageList;
+        }
+        else{
+            tail->next = newMessage;
+            newMessage->previous = tail;
+            tail = tail->next;
+        }
+    }
+    //ID count
+    getline(infile, section, '%');
+    idCounter = stoi(section);
 }
 
 void Sender::writeToFile(){

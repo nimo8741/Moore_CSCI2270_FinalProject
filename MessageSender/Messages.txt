@@ -1,18 +1,9 @@
-MessageSender text file
-%
-Users
-
-aoeu
+admin
+Phil
+Marcus
 Nick
 Scott
-
-%
-Messages
-
-msg id:sender:reciever:note
-
-%
-msgCounter = #
-UPSTREAM work?
-Added from website
-Added from desktop!
+%0*Scott*Nick*Whatsup
+1*Nick*Scott*Nothing much man
+5*Nick*all*This project is great
+%6%

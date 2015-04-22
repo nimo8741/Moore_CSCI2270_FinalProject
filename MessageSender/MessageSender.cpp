@@ -52,14 +52,19 @@ int main(){
                 string recipient;
                 while(found != true && quit != true){
                     getline(cin >> ws, recipient);
-                    found = action->found(recipient);
+                    found = action->findUser(recipient);
                     if(recipient == "all"){
                         quit = true;
                     }
                     else if(found == false){
                         cout<<"Please choose an active user or type 'quit' to leave this option"<<endl;
                     }
-                    if(found == true){
+                    if(recipient == action->curUser()){
+                        cout<<"Why would you want to send a message to yourself?"<<endl;
+                        cout<<"Please choose an active user or type 'quit' to leave this option"<<endl;
+                        found = false;
+                    }
+                    else if(found == true){
                         quit = true;
                     }
                     if(recipient == "quit"){

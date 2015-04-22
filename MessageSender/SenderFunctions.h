@@ -23,9 +23,10 @@ class Sender{
         void viewMessages();
         void printUsers();
         void organizeUsers();
-        bool found(std::string input);
+        bool findUser(std::string input);
         void readFromFile();
         void writeToFile();
+        std::string curUser();
         void deleteAll();
     protected:
     private:

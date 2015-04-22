@@ -116,7 +116,7 @@ void Sender::postMessage(string name, string message){
     }
 }
 
-bool Sender::found(string input){
+bool Sender::findUser(string input){
     bool exists = false;
     for(int i = 0; i < users.size(); i++){
         if(input == users[i]){
@@ -126,6 +126,9 @@ bool Sender::found(string input){
     return exists;
 }
 
+string Sender::curUser(){
+    return currentUser;
+}
 
 void Sender::viewMessages(){   //Loop through all messages and print out Private then Public messages
     vector<int> msgID;

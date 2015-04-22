@@ -18,6 +18,7 @@ int main(){
     getline(cin >> ws, username);
     cout<<endl;
     action->createUser(username);
+    cout << "Current user should be; " << username << " or " << action->curUser()<<endl;
     string cmd;
     while(cmd != "6"){
         cout << "======Main Menu=====" << endl;

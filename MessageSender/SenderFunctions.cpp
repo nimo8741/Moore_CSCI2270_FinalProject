@@ -11,7 +11,6 @@ using namespace std;
 Sender::Sender(){
     messageList = NULL;
     idCounter = 0;
-    readFromFile();
 }
 
 Sender::~Sender(){
@@ -25,6 +24,7 @@ void Sender::createUser(string name){
     for(int i = 0; i < users.size(); i++){
         if(name == users[i]){
             found = true;
+            currentUser = name;
         }
     }
     if(found == false){

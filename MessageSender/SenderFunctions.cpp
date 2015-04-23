@@ -25,6 +25,7 @@ void Sender::createUser(string name){
         if(name == users[i]){
             found = true;
             currentUser = name;
+            cout<<"Welcome back "<<name<<"!"<<endl<<endl;
         }
     }
     if(found == false){
@@ -182,6 +183,7 @@ void Sender::viewMessages(){   //Loop through all messages and print out Private
 
 
 void Sender::deleteMessage(){
+    viewMessages();
     //Copy code from view messages to have same vector of msg id's to match with what the user is deleting
     vector<int> msgID;
     int msgCounter = 0;  //Ties into vector to "remember" spot for different rando msg ID's
@@ -194,7 +196,7 @@ void Sender::deleteMessage(){
             msgID.push_back(trav->id);
             msgCounter++;
         }
-        else if (trav->sender == currentUser){
+        else if (trav->sender == currentUser && trav->receiver != "all"){
             msgID.push_back(trav->id);
             msgCounter++;
         }
@@ -234,14 +236,36 @@ void Sender::deleteMessage(){
     while(trav->id != delID){
         trav = trav->next;
     }
-
-    //Linked list delete
-    trav->previous->next = trav->next;
-    trav->next->previous = trav->previous;
-    delete trav;
-
-
-
+    if(trav->receiver == "all" && trav->sender == currentUser){//if deleting a public message you sent
+        //Linked list delete
+        if(trav->next != NULL){
+            trav->previous->next = trav->next;
+            trav->next->previous = trav->previous;
+            delete trav;
+        }
+        else if(trav->next == NULL){
+            trav->previous->next == NULL;
+            delete trav;
+        }
+    }
+    else if(trav->receiver == currentUser && trav->sender != currentUser){
+     //Linked list delete
+        if(trav->next != NULL){
+            trav->previous->next = trav->next;
+            trav->next->previous = trav->previous;
+            delete trav;
+        }
+        else if(trav->next == NULL){
+            trav->previous->next == NULL;
+            delete trav;
+        }
+    }
+    else{
+        cout<<endl;
+        cout<<"You do not have access to delete this message."<<endl;
+        cout<<"You must be trying to delete a public message you sent"<<endl;
+        cout<<"or a private message that you received from someone else."<<endl<<endl;
+    }
 }
 
 void Sender::deleteAll(){
@@ -250,8 +274,9 @@ void Sender::deleteAll(){
         if(users[i] != "admin"){
             users[i].clear();
         }
-        users.resize(1);
     }
+    users.resize(1);
+    users[0] = "admin";
     idCounter = 0;
 }
 
@@ -325,9 +350,3 @@ void Sender::writeToFile(){
     outfile << '%';
     return;
 }
-
-
-
-
-
-

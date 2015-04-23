@@ -32,9 +32,13 @@ int main(){
         }
 
 		cin>>cmd;
-		if(cmd != "1" && cmd != "2" && cmd != "3" && cmd != "4" && cmd != "5" && cmd != "6" and cmd != "7"){
+		if(action->curUser() == "admin" && cmd != "1" && cmd != "2" && cmd != "3" && cmd != "4" && cmd != "5" && cmd != "6" and cmd != "7"){
             cout<<"Please select an appropriate command."<<endl;
-            cout<<"An appropriate command is a number 1 through 5."<<endl;
+            cout<<"An appropriate command is a number 1 through 7."<<endl;
+		}
+		else if(action->curUser() != "admin" && cmd != "1" && cmd != "2" && cmd != "3" && cmd != "4" && cmd != "5" && cmd != "6" and cmd != "7"){
+            cout<<"Please select an appropriate command."<<endl;
+            cout<<"An appropriate command is a number 1 through 6."<<endl;
 		}
 		else{
             if(cmd == "1"){
@@ -51,16 +55,19 @@ int main(){
                 cout<<"For a public message, please type 'all'"<<endl;
                 cout<<"For a private message, please type the name of an active user"<<endl;
                 cout<<"Please choose a recipient for the message"<<endl;
+                cout<<"You may type 'quit' should you wish to leave this option."<<endl;
                 bool found = false;
                 bool quit = false;
                 string recipient;
+                bool good = false;
                 while(found != true && quit != true){
                     getline(cin >> ws, recipient);
                     found = action->findUser(recipient);
                     if(recipient == "all"){
                         quit = true;
+                        good = true;
                     }
-                    else if(found == false){
+                    else if(found == false && recipient != "quit"){
                         cout<<"Please choose an active user or type 'quit' to leave this option"<<endl;
                     }
                     if(recipient == action->curUser()){
@@ -70,13 +77,17 @@ int main(){
                     }
                     else if(found == true){
                         quit = true;
+                        good = true;
                     }
                     if(recipient == "quit"){
                         quit = true;
+                        good = false;
                     }
                 }
                 cout<<endl;
-                action->postMessage(recipient, in_message);
+                if(good == true){
+                    action->postMessage(recipient, in_message);
+                }
             }
             else if(cmd == "4"){
                 action->deleteMessage();
@@ -98,9 +109,10 @@ int main(){
                     action->deleteAll();
                 }
                 else{
+                    cout<<endl;
                     cout<<"You do not have access to perform this function."<<endl;
                     cout<<"You must be the admin to delete all"<<endl;
-                    cout<<"How would you have known to select this?"<<endl;
+                    cout<<"How would you have known to select this?"<<endl<<endl;
                 }
             }
 		}

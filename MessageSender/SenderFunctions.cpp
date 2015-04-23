@@ -246,7 +246,12 @@ void Sender::deleteMessage(){
 
 void Sender::deleteAll(){
     messageList = NULL;
-    users.clear();
+    for(int i = 0; i < users.size(); i++){
+        if(users[i] != "admin"){
+            users[i].clear();
+        }
+        users.resize(1);
+    }
 }
 
 void Sender::readFromFile(){

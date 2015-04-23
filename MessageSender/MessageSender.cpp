@@ -93,8 +93,15 @@ int main(){
                 action->writeToFile();
             }
             else if(cmd == "7"){
-                cout << "Deleting all users and messages" << endl;
-                action->deleteAll();
+                if(action->curUser() == "admin"){
+                    cout << "Deleting all users and messages" << endl;
+                    action->deleteAll();
+                }
+                else{
+                    cout<<"You do not have access to perform this function."<<endl;
+                    cout<<"You must be the admin to delete all"<<endl;
+                    cout<<"How would you have know to select this?"<<endl;
+                }
             }
 		}
     }

@@ -252,6 +252,7 @@ void Sender::deleteAll(){
         }
         users.resize(1);
     }
+    idCounter = 0;
 }
 
 void Sender::readFromFile(){
@@ -299,7 +300,30 @@ void Sender::readFromFile(){
 }
 
 void Sender::writeToFile(){
-
+    /*Write to file in following format:
+    user1
+    user2
+    %msg1*sender*receiver*note
+    msg2*sender*receiver*note
+    %IDCount
+    %
+    */
+    ofstream outfile;
+    outfile.open("Messages.txt");
+    for (int i = 0; i < users.size(); ++i)
+    {
+        outfile << users[i] << endl;
+    }
+    outfile << '%';
+    Message *trav = messageList;
+    while (trav != NULL){
+        outfile << trav->id <<"*"<< trav->sender <<"*"<< trav->receiver <<"*"<<trav->note << endl;
+        trav = trav->next;
+    }
+    outfile << '%';
+    outfile << idCounter << endl;
+    outfile << '%';
+    return;
 }
 
 

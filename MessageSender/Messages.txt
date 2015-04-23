@@ -1,10 +1,13 @@
-admin
-Phil
+
 Marcus
 Nick
+Phil
 Scott
-%0*Scott*Nick*Whatsup
-1*Nick*Scott*Nothing much man
-5*Nick*all*This project is great
-6*Marcus*all*My name is marcus
-%6%
+admin
+o
+%0*o*quit*'uit
+1*Scott*Nick*Tell me if you see this
+2*Scott*all*I think i have outfile mostly working.  I am running into trouble where IDCounter is not being reset.  But that doesnt matter
+3*admin*all*Also when admin deletes all, he doesnt remain alphabetaically sorted
+%4
+%

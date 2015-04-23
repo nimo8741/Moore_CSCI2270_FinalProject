@@ -100,7 +100,7 @@ int main(){
                 else{
                     cout<<"You do not have access to perform this function."<<endl;
                     cout<<"You must be the admin to delete all"<<endl;
-                    cout<<"How would you have know to select this?"<<endl;
+                    cout<<"How would you have known to select this?"<<endl;
                 }
             }
 		}

@@ -15,4 +15,5 @@ Contributors:
 
 Open issues/bugs:
   Bug: When sending a message and attempting to quit, it's suppose to quit but instead sends a message to account "quit". 
+  Bug:  When deleting messages, it will appear to give user rights to delete public messages that arent associated with them.  Seg faults when user trys to delete them
   Enhancement request:  A password system that requires a user to enter a password when logging in.  

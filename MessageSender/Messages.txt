@@ -8,5 +8,6 @@ o
 2*Scott*all*I think i have outfile mostly working.  I am running into trouble where IDCounter is not being reset.  But that doesnt matter
 3*admin*all*Also when admin deletes all, he doesnt remain alphabetaically sorted
 5*Marcus*Nick*Does this work???????
-%6
+6*Scott*all*THis does all work!!  We should just use Dropbox to sync this file instead of passing it through github to transfer messages
+%7
 %

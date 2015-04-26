@@ -142,7 +142,13 @@ void Sender::viewMessages(){   //Loop through all messages and print out Private
     cout << endl << "     PRIVATE" << endl;
     bool isEmpty = true;
     while(trav != NULL){
-        if (trav->receiver == currentUser){
+        if (currentUser == "admin" and trav->receiver != "all"){
+            cout << msgCounter << ": " << trav->sender << " to " << trav->receiver << " - " << trav->note << endl;
+            msgID.push_back(trav->id);
+            msgCounter++;
+            isEmpty = false;
+        }
+        else if (trav->receiver == currentUser){
             cout << msgCounter << ": " << trav->sender << " - " << trav->note << endl;
             msgID.push_back(trav->id);
             msgCounter++;
@@ -192,14 +198,16 @@ void Sender::deleteMessage(){
 
     //Private
     while (trav != NULL){
-        if (trav->receiver == currentUser){
+        if (currentUser == "admin" and trav->receiver != "all"){
             msgID.push_back(trav->id);
-            msgCounter++;
+        }
+        else if (trav->receiver == currentUser){
+            msgID.push_back(trav->id);
         }
         else if (trav->sender == currentUser && trav->receiver != "all"){
             msgID.push_back(trav->id);
-            msgCounter++;
         }
+        msgCounter++;
         trav = trav->next;
     }
 
@@ -208,8 +216,8 @@ void Sender::deleteMessage(){
     while (trav != NULL){
         if (trav->receiver == "all"){
             msgID.push_back(trav->id);
-            msgCounter++;
         }
+        msgCounter++;
         trav = trav->next;
     }
 
@@ -236,20 +244,7 @@ void Sender::deleteMessage(){
     while(trav->id != delID){
         trav = trav->next;
     }
-    if(trav->receiver == "all" && trav->sender == currentUser){//if deleting a public message you sent
-        //Linked list delete
-        if(trav->next != NULL){
-            trav->previous->next = trav->next;
-            trav->next->previous = trav->previous;
-            delete trav;
-        }
-        else if(trav->next == NULL){
-            trav->previous->next == NULL;
-            delete trav;
-        }
-    }
-    else if(trav->receiver == currentUser && trav->sender != currentUser){
-     //Linked list delete
+    if ((currentUser == "admin") or (trav->receiver == "all" and trav->sender == currentUser) or (trav->receiver == currentUser)){
         if(trav->next != NULL){
             trav->previous->next = trav->next;
             trav->next->previous = trav->previous;
@@ -342,7 +337,9 @@ void Sender::writeToFile(){
     outfile << '%';
     Message *trav = messageList;
     while (trav != NULL){
-        outfile << trav->id <<"*"<< trav->sender <<"*"<< trav->receiver <<"*"<<trav->note << endl;
+        //FIx for not deleting message itself, only content
+        if (trav->sender != "" and trav->note != "")
+            outfile << trav->id <<"*"<< trav->sender <<"*"<< trav->receiver <<"*"<<trav->note << endl;
         trav = trav->next;
     }
     outfile << '%';

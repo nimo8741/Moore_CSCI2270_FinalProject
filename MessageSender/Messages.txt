@@ -1,12 +1,11 @@
-Marcus
 Nick
-Phil
 Scott
 admin
 %4*Scott*Nick*Hey Nick, aren't you so glad we decieded to do CSCI 2270?
 5*Nick*Scott*I am!  This class has taught me so much as well as allowed me to solve the worlds problems
 6*Scott*Nick*Worlds problems?  You mean the fastest way to input entries into an array or designing a red black tree?  NO KIDDING!
 7*Scott*all*Rememeber, if you "Switch Users" to a User that has not been made yet, that user will simply be created.  To delete that user, request (login) to the admin to delete that singular user
-11*admin*all*admin can seen messages as blank when deleted.  Don't attempt to delete them again.  When saving to the file, those messages will not be written and at that time the problem is "fixed".
+11*admin*all*admin can seen all the messages!  So don't go messaging anything you wouldn't want your mother to see.
+12*Nick*Scott*Exactly! Or even better - traversing graphs and building networks to avoid zombies. 
 %13
 %

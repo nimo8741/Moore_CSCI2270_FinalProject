@@ -19,6 +19,29 @@ Sender::~Sender(){
     }
 }
 
+/*Function prototype
+void Sender::createUser(string name(
+
+Function description:
+This program either creates a user or sets the
+desired user as the current user.  This decision is
+based on whether the user name already exists within
+the users vector
+
+Example:
+Sender test;
+test.createUser("Billy");
+
+Precondition:
+Txt file that contains the user names and info
+has been read it.
+
+Post condition:
+Switches the currentUser to whatever user is
+passed into the function and if necessary,
+adds the passed in user name to the users vector.
+*/
+
 void Sender::createUser(string name){
     bool found  = false;
     for(int i = 0; i < users.size(); i++){
@@ -41,6 +64,22 @@ void Sender::createUser(string name){
     }
 }
 
+/*
+Function prototype:
+void Sender::organizeUsers();
+
+Function description:
+This function reorders the users vector into
+alphabetical order.
+
+Precondition:
+The Txt file that contains the user names and
+information has been read in.
+
+Post condition:
+The users vector is in alphabetical order.
+*/
+
 void Sender::organizeUsers(){
     string swapName;
     int n = users.size();
@@ -55,6 +94,18 @@ void Sender::organizeUsers(){
     }
 }
 
+/*
+Function prototype:
+void Sender::printUsers();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
+
 void Sender::printUsers(){
     if(users.size() == 0){    //this if condition should never happen but I included it anyways
         cout<<"No active users"<<endl;
@@ -68,6 +119,18 @@ void Sender::printUsers(){
         cout<<endl;
     }
 }
+
+/*
+Function prototype:
+void Sender::changeUser();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
 
 void Sender::changeUser(string name){
     bool found  = false;
@@ -95,6 +158,18 @@ void Sender::changeUser(string name){
     }
 }
 
+/*
+Function prototype:
+void Sender::postMessage();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
+
 void Sender::postMessage(string name, string message){
     Message *current = new Message;
     Message *temp = new Message;
@@ -117,6 +192,18 @@ void Sender::postMessage(string name, string message){
         current->previous = temp;
     }
 }
+
+/*
+Function prototype:
+void Sender::findUser();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
 
 bool Sender::findUser(string input){
     bool exists = false;
@@ -187,6 +274,17 @@ void Sender::viewMessages(){   //Loop through all messages and print out Private
 
 }
 
+/*
+Function prototype:
+void Sender::deleteMessage();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
 
 void Sender::deleteMessage(){
     viewMessages();
@@ -251,7 +349,7 @@ void Sender::deleteMessage(){
             delete trav;
         }
         else if(trav->next == NULL){
-            trav->previous->next == NULL;
+            trav->previous->next = NULL;
             delete trav;
         }
     }
@@ -262,6 +360,18 @@ void Sender::deleteMessage(){
         cout<<"or a private message that you received from someone else."<<endl<<endl;
     }
 }
+
+/*
+Function prototype:
+void Sender::deleteAll();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
 
 void Sender::deleteAll(){
     messageList = NULL;
@@ -274,6 +384,18 @@ void Sender::deleteAll(){
     users[0] = "admin";
     idCounter = 0;
 }
+
+/*
+Function prototype:
+void Sender::readFromFile();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
 
 void Sender::readFromFile(){
     ifstream infile;
@@ -318,6 +440,18 @@ void Sender::readFromFile(){
     getline(infile, section, '%');
     idCounter = stoi(section);
 }
+
+/*
+Function prototype:
+void Sender::writeToFile();
+
+Function description:
+
+Precondition:
+
+Post condition:
+
+*/
 
 void Sender::writeToFile(){
     /*Write to file in following format:

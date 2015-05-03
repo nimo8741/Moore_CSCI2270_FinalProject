@@ -99,11 +99,21 @@ Function prototype:
 void Sender::printUsers();
 
 Function description:
+This function prints the users sequentially from the users vector.
+This will print them in alphabetical order.
+If their are no active users.  The function will display
+that their are no users.
+
+Example:
+User will never call this function themselves.  It is only called from
+within the createUser and changeUser functions and does not take
+arguments.
 
 Precondition:
+The organizeUsers() has been run.
 
 Post condition:
-
+A list of user name will be displayed to the serial monitor.
 */
 
 void Sender::printUsers(){
@@ -125,11 +135,22 @@ Function prototype:
 void Sender::changeUser();
 
 Function description:
+This function changes the current user after the user has already
+been signed into a user name at the beginning of the program.
+If the user name they are trying to sign into does not exist
+in the users vector, then a new user name is created and that becomes
+the new currentUser.
+
+Example:
+Sender test;
+test.changeUser("Todd");
 
 Precondition:
+The Txt file that contains the user names and info must be read in
+so that there is not an overlap in the data.
 
 Post condition:
-
+The currentUser becomes what ever user name is passed into the function.
 */
 
 void Sender::changeUser(string name){
@@ -163,11 +184,21 @@ Function prototype:
 void Sender::postMessage();
 
 Function description:
+This function will post a either a public message to all users
+or a private message to a single recipient.
+
+Example:
+Sender test;
+test.postMessage("Scott", "Hey! How's it going?");
 
 Precondition:
+The Txt file that contains user names must be read in and. The arguments
+that are passed in must not contain the "%" or "*" characters as this will
+break the reading and writing to file functions.
 
 Post condition:
-
+If the user decides to view their messages, they will see the messages
+that they posted as well as the ones that they received.
 */
 
 void Sender::postMessage(string name, string message){
@@ -198,11 +229,21 @@ Function prototype:
 void Sender::findUser();
 
 Function description:
+This function will return a bool (true or false) on whether the
+desired user exists within the users vector.
+
+Example:
+bool exists;
+Sender test;
+exists = test.findUser("Scott");
+
+exists will equal true unless the Scott user name has been deleted.
 
 Precondition:
+The Txt file that contains user names and info must be read in.
 
 Post condition:
-
+A bool that is either true or false is returned.
 */
 
 bool Sender::findUser(string input){
@@ -218,6 +259,23 @@ bool Sender::findUser(string input){
 string Sender::curUser(){
     return currentUser;
 }
+
+/*
+Function Prototype:
+void Sender::viewMessages();
+
+Function Description:
+This function displays all messages to the current user that are either
+public messages, private messages to them, or private messages they send.
+
+Precondition:
+This requires that the Txt file that contains user names and info has been read in.
+
+Post Condition:
+An ordered list of the messages with descriptions of who they are from will be
+displayed to the serial monitor.  If there are no private or public messages for the user,
+a YOUR INBOX IS EMPTY message will appear in the corresponding inbox.
+*/
 
 void Sender::viewMessages(){   //Loop through all messages and print out Private then Public messages
     vector<int> msgID;
@@ -279,10 +337,20 @@ Function prototype:
 void Sender::deleteMessage();
 
 Function description:
+This function deletes a message that the user has access to delete.  The admin
+user has access to delete any message.  Any other user has access to delete
+public messages that they post or private messages that they receive.
 
 Precondition:
+This requires that the Txt file that contains user names and info has been read in.
+When the function is run, it will ask the user for the ID number for the message
+they would like to delete.  These numbers will be displayed to the left of the
+messages.  The function is expecting an integer input.
 
 Post condition:
+The function will delete that message (assuming the user has access to delete that
+message) and if the user selects to viewMessages after deleting a valid message,
+they will see that it is no longer there.
 
 */
 
@@ -366,11 +434,14 @@ Function prototype:
 void Sender::deleteAll();
 
 Function description:
+This function is only permitted to be used by the admin user and deletes
+all messages and all users except for the admin user itself.
 
 Precondition:
+This requires that the currentUser be the admin user.
 
 Post condition:
-
+All messages and user names except admin will be deleted.
 */
 
 void Sender::deleteAll(){
@@ -390,11 +461,16 @@ Function prototype:
 void Sender::readFromFile();
 
 Function description:
+This reads the data in from the Messages.txt file and places the data into either Message structs
+or into the users vector, depend on what the data corresponds to.
 
 Precondition:
+This function requires that that the Messages.txt file is located in a place that the
+program can access it.
 
 Post condition:
-
+Assuming their is data in the txt file, the users vector will be populated
+and there will be messages to view.
 */
 
 void Sender::readFromFile(){
@@ -446,11 +522,17 @@ Function prototype:
 void Sender::writeToFile();
 
 Function description:
+This function takes the condition of the users vector and Message struct linked list
+and writes the data to a txt file so that the data can be read in later if the program
+is closed.
 
 Precondition:
+This function will only run if the user selects to quit the MessageSender program from
+the main menu.
 
 Post condition:
-
+The MessageSender program will close and the Messages.txt file will include all the
+data from the last session of the program.
 */
 
 void Sender::writeToFile(){
